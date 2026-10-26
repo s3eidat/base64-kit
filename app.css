@@ -1,0 +1,6 @@
+.b64-ta { min-height: 170px; }
+.b64-prev { display: block; max-width: 100%; max-height: 180px; object-fit: contain; border-radius: 12px; border: 1px solid var(--line); }
+.b64-files { align-items: start; }
+#fileOut { min-height: 120px; }
+#binIn { min-height: 120px; }
+.b64-dl { align-self: end; }

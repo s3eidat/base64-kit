@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Base64 Kit — Free Base64 Encoder &amp; Decoder for Text and Files | S3eidat Tools</title>
+<meta name="description" content="Encode and decode Base64 in your browser. UTF-8 safe text, URL-safe variant, file to Base64 or data URI, Base64 back to a file with its type detected. Free, private, nothing uploaded.">
+<meta property="og:title" content="Base64 Kit — free, private Base64 encoder and decoder">
+<meta property="og:description" content="Text and files to Base64 and back. Runs 100% in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="base64-kit">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Base64 Kit</h1>
+    <p>Encode and decode Base64 for text and files. UTF-8 safe, URL-safe variant, data URIs, and the file type detected from its bytes. Nothing leaves your browser.</p>
+  </section>
+
+  <section class="card">
+    <div class="row between">
+      <h2>Text</h2>
+      <div class="row">
+        <label class="check"><input type="checkbox" id="urlsafe"> URL-safe (<code>-_</code>, no padding)</label>
+        <label class="check"><input type="checkbox" id="wrap"> Wrap at 76</label>
+        <button class="btn ghost small" id="clear">Clear</button>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="stack">
+        <div class="row between">
+          <label for="plain" class="faint">Plain text (UTF-8)</label>
+          <button class="btn small" id="copyPlain"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+        </div>
+        <textarea class="textarea b64-ta" id="plain" dir="auto" spellcheck="false" placeholder="Type or paste text… it is encoded as you type"></textarea>
+        <span class="faint" id="plainInfo">0 bytes</span>
+      </div>
+      <div class="stack">
+        <div class="row between">
+          <label for="code" class="faint">Base64</label>
+          <button class="btn small" id="copyCode"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+        </div>
+        <textarea class="textarea b64-ta" id="code" spellcheck="false" placeholder="…or paste Base64 here to decode it"></textarea>
+        <span class="row"><span class="chip" id="codeStatus">Waiting</span></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid-2 mt b64-files">
+    <section class="card stack">
+      <h2>File → Base64</h2>
+      <label class="drop" id="drop" tabindex="0">
+        <input type="file" hidden>
+        <svg class="i"><use href="#i-upload"/></svg>
+        <b>Drop a file or click to choose</b>
+        <span class="faint">Any type, up to 50 MB. Read locally.</span>
+      </label>
+      <div id="fileBox" class="stack" hidden>
+        <div class="row between">
+          <div class="row"><span class="chip accent" id="fileType"></span><span class="faint" id="fileMeta"></span></div>
+          <div class="seg" id="fileMode" role="group" aria-label="Output format">
+            <button aria-pressed="true" data-v="b64">Base64</button>
+            <button aria-pressed="false" data-v="uri">Data URI</button>
+          </div>
+        </div>
+        <img id="filePrev" class="b64-prev checker" alt="Preview of the chosen file" hidden>
+        <label class="field">Output<textarea class="textarea" id="fileOut" readonly spellcheck="false"></textarea></label>
+        <div class="row">
+          <button class="btn primary" id="fileCopy"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+          <button class="btn" id="fileSave"><svg class="i"><use href="#i-download"/></svg>.txt</button>
+          <span class="faint" id="fileLen"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card stack">
+      <h2>Base64 → File</h2>
+      <label class="field">Base64 or data URI
+        <textarea class="textarea" id="binIn" spellcheck="false" placeholder="data:image/png;base64,iVBORw0KGgo… or plain Base64"></textarea>
+      </label>
+      <div class="row"><span class="chip" id="binType">Paste Base64 to detect the file type</span><span class="faint" id="binMeta"></span></div>
+      <img id="binPrev" class="b64-prev checker" alt="Preview of the decoded image" hidden>
+      <div class="row">
+        <label class="field grow">File name<input class="input" id="binName" value="decoded.bin" spellcheck="false"></label>
+        <button class="btn primary b64-dl" id="binSave" disabled><svg class="i"><use href="#i-download"/></svg>Download</button>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
